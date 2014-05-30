@@ -37,10 +37,8 @@ $ sudo /usr/lib64/fluent/ruby/bin/fluent-gem install fluent-plugin-qqwry
 
   # Set adding field with placeholder (more than one settings are required.)
   <record>
-    city            ${city['host']}
-    area            ${area_code['host']}
+    area            ${area['host']}
     country         ${country['host']}
-    province        ${province['host']}
   </record>
 
   # Settings for tag
