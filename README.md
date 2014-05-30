@@ -1,8 +1,10 @@
 # fluent-plugin-qqwry
 
+[![Gem Version](https://badge.fury.io/rb/fluent-plugin-qqwry.svg)](http://badge.fury.io/rb/fluent-plugin-qqwry)
+
 Fluentd Output plugin to add information about geographical location of IP addresses with QQWry databases.
 
-fluent-plugin-geoip has bundled qqwry.dat
+fluent-plugin-geoip has bundled qqwry.dat (http://www.cz88.net)
 
 ## Dependency
 
