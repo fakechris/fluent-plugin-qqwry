@@ -60,8 +60,8 @@ $ sudo /usr/lib64/fluent/ruby/bin/fluent-gem install fluent-plugin-qqwry
   type qqwry
   qqwry_lookup_key  user1_host, user2_host
   <record>
-    user1_city      ${city['user1_host']}
-    user2_city      ${city['user2_host']}
+    user1_area      ${area['user1_host']}
+    user2_area      ${area['user2_host']}
   </record>
   remove_tag_prefix access.
   tag               qqwry.${tag}
@@ -86,9 +86,8 @@ $ sudo /usr/lib64/fluent/ruby/bin/fluent-gem install fluent-plugin-qqwry
     type    qqwry
     qqwry_lookup_key  host
     <record>
-      city  ${city['host']}
-      lat   ${latitude['host']}
-      lon   ${longitude['host']}
+      area  ${area['host']}
+      country   ${country['host']}
     </record>
     remove_tag_prefix test.
     tag     debug.${tag}
@@ -109,7 +108,7 @@ $ echo '{"host":"66.102.9.80","message":"test"}' | fluent-cat test.qqwry
 # check the result at stdout
 $ tail /var/log/td-agent/td-agent.log
 2013-08-04 16:21:32 +0900 test.qqwry: {"host":"66.102.9.80","message":"test"}
-2013-08-04 16:21:32 +0900 debug.qqwry: {"host":"66.102.9.80","message":"test","city":"Mountain View","lat":37.4192008972168,"lon":-122.05740356445312}
+2013-08-04 16:21:32 +0900 debug.qqwry: {"host":"66.102.9.80","message":"test","area":"电信ADSL","country":"福建省厦门市海沧区"}
 ```
 
 ## Parameters
