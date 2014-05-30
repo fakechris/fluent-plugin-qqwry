@@ -8,7 +8,7 @@ class Fluent::QQWryOutput < Fluent::BufferedOutput
   REGEXP_PLACEHOLDER_SCAN = /(\$\{[^\}]+?\})/
   QQWRY_KEYS = %w(area country)
 
-  config_param :qqwry_database, :string, :default => File.dirname(__FILE__) + '/../../../data/qqwry.dat'
+  config_param :qqwry_database, :string, :default => File.dirname(__FILE__) + '/../../../data/qqwry_2013.dat'
   config_param :qqwry_lookup_key, :string, :default => 'host'
   config_param :tag, :string, :default => nil
 
