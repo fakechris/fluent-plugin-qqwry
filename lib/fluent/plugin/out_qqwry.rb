@@ -6,7 +6,7 @@ class Fluent::QQWryOutput < Fluent::BufferedOutput
   REGEXP_JSON = /(^[\[\{].+[\]\}]$|^[\d\.\-]+$)/
   REGEXP_PLACEHOLDER_SINGLE = /^\$\{(?<qqwry_key>-?[^\[]+)\['(?<record_key>-?[^']+)'\]\}$/
   REGEXP_PLACEHOLDER_SCAN = /(\$\{[^\}]+?\})/
-  QQWRY_KEYS = %w(city latitude longitude country_code3 country_code country_name dma_code area_code region)
+  QQWRY_KEYS = %w(area country)
 
   config_param :qqwry_database, :string, :default => File.dirname(__FILE__) + '/../../../data/qqwry.dat'
   config_param :qqwry_lookup_key, :string, :default => 'host'
@@ -29,6 +29,7 @@ class Fluent::QQWryOutput < Fluent::BufferedOutput
 
   def initialize
     require 'qqwry'
+    require 'yajl'
 
     super
   end
@@ -159,7 +160,7 @@ class Fluent::QQWryOutput < Fluent::BufferedOutput
     @placeholder_keys.each do |placeholder_key|
       position = placeholder_key.match(REGEXP_PLACEHOLDER_SINGLE)
       next if position.nil? or geodata[position[:record_key]].nil?
-      placeholder.store(placeholder_key, geodata[position[:record_key]][position[:qqwry_key].to_sym])
+      placeholder.store(placeholder_key, geodata[position[:record_key]].send(position[:qqwry_key].to_sym))
     end
     return placeholder
   end

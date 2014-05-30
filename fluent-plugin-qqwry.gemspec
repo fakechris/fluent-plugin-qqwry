@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "fluent-plugin-qqwry"
-  spec.version       = "0.0.1"
+  spec.version       = "0.0.2"
   spec.authors       = ["Chris Song"]
   spec.email         = ["fakechris@gmail.com"]
   spec.summary       = %q{Fluentd Output plugin to add information about geographical location of IP addresses with QQWry databases.}
@@ -21,4 +21,5 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "fluentd"
   spec.add_runtime_dependency "fluent-mixin-rewrite-tag-name"
   spec.add_runtime_dependency "qqwry"
+  spec.add_runtime_dependency "yajl"
 end
