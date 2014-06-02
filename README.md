@@ -4,7 +4,7 @@
 
 Fluentd Output plugin to add information about geographical location of IP addresses with QQWry databases.
 
-fluent-plugin-geoip has bundled qqwry.dat (http://www.cz88.net)
+fluent-plugin-qqwry has bundled qqwry.dat (http://www.cz88.net)
 
 ## Dependency
 
@@ -32,7 +32,7 @@ $ sudo /usr/lib64/fluent/ruby/bin/fluent-gem install fluent-plugin-qqwry
   # in the case of accessing nested value, delimit keys by dot like 'host.ip'.
   qqwry_lookup_key  host
 
-  # Specify optional qqwry database (using bundled GeoLiteCity databse by default)
+  # Specify optional qqwry database (using bundled QQWry databse by default)
   qqwry_database    '/path/to/your/qqwry.dat'
 
   # Set adding field with placeholder (more than one settings are required.)
@@ -128,7 +128,7 @@ Set one or more option are required unless using `tag` option for editing tag na
 
 * `tag`
 
-On using this option with tag placeholder like `tag qqwry.${tag}` (test code is available at [test_out_qqwry.rb](https://github.com/y-ken/fluent-plugin-geoip/blob/master/test/plugin/test_out_geoip.rb)), it will be overwrite after these options affected. which are remove_tag_prefix, remove_tag_suffix, add_tag_prefix and add_tag_suffix.
+On using this option with tag placeholder like `tag qqwry.${tag}` (test code is available at [test_out_qqwry.rb](https://github.com/fakechris/fluent-plugin-qqwry/blob/master/test/plugin/test_out_qqwry.rb)), it will be overwrite after these options affected. which are remove_tag_prefix, remove_tag_suffix, add_tag_prefix and add_tag_suffix.
 
 * `flush_interval` (default: 0 sec)
 
