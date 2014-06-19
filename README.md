@@ -4,7 +4,7 @@
 
 Fluentd Output plugin to add information about geographical location of IP addresses with QQWry databases.
 
-fluent-plugin-geoip has bundled qqwry.dat (http://www.cz88.net)
+fluent-plugin-qqwry has bundled qqwry.dat (http://www.cz88.net)
 
 ## Dependency
 
@@ -32,15 +32,13 @@ $ sudo /usr/lib64/fluent/ruby/bin/fluent-gem install fluent-plugin-qqwry
   # in the case of accessing nested value, delimit keys by dot like 'host.ip'.
   qqwry_lookup_key  host
 
-  # Specify optional qqwry database (using bundled GeoLiteCity databse by default)
+  # Specify optional qqwry database (using bundled QQWry databse by default)
   qqwry_database    '/path/to/your/qqwry.dat'
 
   # Set adding field with placeholder (more than one settings are required.)
   <record>
-    city            ${city['host']}
-    area            ${area_code['host']}
+    area            ${area['host']}
     country         ${country['host']}
-    province        ${province['host']}
   </record>
 
   # Settings for tag
@@ -62,8 +60,8 @@ $ sudo /usr/lib64/fluent/ruby/bin/fluent-gem install fluent-plugin-qqwry
   type qqwry
   qqwry_lookup_key  user1_host, user2_host
   <record>
-    user1_city      ${city['user1_host']}
-    user2_city      ${city['user2_host']}
+    user1_area      ${area['user1_host']}
+    user2_area      ${area['user2_host']}
   </record>
   remove_tag_prefix access.
   tag               qqwry.${tag}
@@ -88,9 +86,8 @@ $ sudo /usr/lib64/fluent/ruby/bin/fluent-gem install fluent-plugin-qqwry
     type    qqwry
     qqwry_lookup_key  host
     <record>
-      city  ${city['host']}
-      lat   ${latitude['host']}
-      lon   ${longitude['host']}
+      area  ${area['host']}
+      country   ${country['host']}
     </record>
     remove_tag_prefix test.
     tag     debug.${tag}
@@ -111,7 +108,7 @@ $ echo '{"host":"66.102.9.80","message":"test"}' | fluent-cat test.qqwry
 # check the result at stdout
 $ tail /var/log/td-agent/td-agent.log
 2013-08-04 16:21:32 +0900 test.qqwry: {"host":"66.102.9.80","message":"test"}
-2013-08-04 16:21:32 +0900 debug.qqwry: {"host":"66.102.9.80","message":"test","city":"Mountain View","lat":37.4192008972168,"lon":-122.05740356445312}
+2013-08-04 16:21:32 +0900 debug.qqwry: {"host":"66.102.9.80","message":"test","area":"电信ADSL","country":"福建省厦门市海沧区"}
 ```
 
 ## Parameters
@@ -131,7 +128,7 @@ Set one or more option are required unless using `tag` option for editing tag na
 
 * `tag`
 
-On using this option with tag placeholder like `tag qqwry.${tag}` (test code is available at [test_out_qqwry.rb](https://github.com/y-ken/fluent-plugin-geoip/blob/master/test/plugin/test_out_geoip.rb)), it will be overwrite after these options affected. which are remove_tag_prefix, remove_tag_suffix, add_tag_prefix and add_tag_suffix.
+On using this option with tag placeholder like `tag qqwry.${tag}` (test code is available at [test_out_qqwry.rb](https://github.com/fakechris/fluent-plugin-qqwry/blob/master/test/plugin/test_out_qqwry.rb)), it will be overwrite after these options affected. which are remove_tag_prefix, remove_tag_suffix, add_tag_prefix and add_tag_suffix.
 
 * `flush_interval` (default: 0 sec)
 
